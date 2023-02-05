@@ -1,0 +1,7 @@
+To make the web scraper work, you'll need to have a folder that contains the following files: 
+
+common.py
+listing.py
+pages.py
+
+The main_glassdoor_scraper code file will use functions from these files.
