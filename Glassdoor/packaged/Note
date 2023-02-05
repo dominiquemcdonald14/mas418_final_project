@@ -7,4 +7,8 @@ pages.py
 The main_glassdoor_scraper code file will use functions from these files.
 
 The code creates an output folder called "output". The dataset csv file will be found there once you're done scraping. 
-Don't run it multiple times because the output will not overwrite the csv file but rather ADD on to the already existing dataset. Since the scraper will scrape data in real time, you're going to end up with duplicates. 
+Don't run it multiple times because the output will not overwrite the csv file but rather ADD on to the already existing dataset. 
+Since the scraper will scrape data in real time, you're going to end up with duplicates. 
+
+The scraper works but I still need to add code that would extract the specific info we'll need for the project. 
+We would need to adjust the code in listing.py and the main_glassdoor_scraper file.
