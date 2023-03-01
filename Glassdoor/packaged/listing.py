@@ -51,14 +51,14 @@ def extract_listingBanner(listing_soup):
         except:
             company_roleLocation = "NA"
         
-        try:
-            company_salary = listing_bannerGroup.find("div", class_= "css-1bluz6i e2u4hf13").getText() #and this
-        except:
+        try: 
+            company_salary = listing_bannerGroup.find("span", class_="small css-10zcshf e1v3ed7e1").getText() #added this
+        except: 
             company_salary = "NA"
 
-    return companyName, company_starRating, company_offeredRole, company_roleLocation, company_salary
+    return companyName, company_starRating, company_offeredRole, company_roleLocation, company_salary #added this at end
 
-
+    
 # extracts desired data from listing description
 def extract_listingDesc(listing_soup):
     extract_listingDesc_tmpList = []
@@ -83,10 +83,11 @@ def extract_listingDesc(listing_soup):
 
         listing_jobDesc = " ".join(extract_listingDesc_tmpList)
 
-        if len(listing_jobDesc) <= 10:
+        if len(listing_jobDesc) <= 30:
             listing_jobDesc = listing_jobDesc_raw.getText()
 
     return listing_jobDesc
+
 
 
 # extract data from listing
@@ -101,9 +102,10 @@ def extract_listing(url):
 
     if request_success:
         companyName, company_starRating, company_offeredRole, company_roleLocation, company_salary = extract_listingBanner(listing_soup)
+       
         listing_jobDesc = extract_listingDesc(listing_soup)
 
-        return (companyName, company_starRating, company_offeredRole, company_roleLocation, company_salary, listing_jobDesc, requested_url) #need to update return argument here
+    return (companyName, company_starRating, company_offeredRole, company_roleLocation, company_salary, listing_jobDesc, requested_url) #need to update return argument here
 
 
 if __name__ == "__main__":

@@ -127,4 +127,5 @@ class glassdoor_scraper():
 
 
 #run the scraper  
-glassdoor_scraper(configfile = "config.json",baseurl = "https://www.glassdoor.com/Job/data-scientist-jobs-SRCH_KO0,14.htm?context=Jobs&clickSource=searchBox", targetnum = 10)
+glassdoor_scraper(configfile = "config.json",baseurl = "https://www.glassdoor.com/Job/data-scientist-jobs-SRCH_KO0,14.htm?context=Jobs&clickSource=searchBox", targetnum = 900)
+#request to scrape the maximum amount of jobs listed on glassdoor website = 900 (30 listings per page, 30 pages total)
