@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+<h1>Recommender </h1>
+<p>Please specify the criteria for your ideal job!</p>
+
+<form id = "job_criteria">
+	<label for ="job_title" >Job Title </label>
+	<input type = "text" id ="job_title"  name = "job_title"><br>
+	<label for= "salary">Minimum Salary </label>
+	<input type = "number" id = "salary" name = "salary"><br>
+	<label for="location"> Location </label>
+	<input type = "text" id = "location" name = "location"><br>
+</form>
+<label for= "rating"> Company Rating </label>
+<select name = "rating" id = "rating" form = "job_criteria">
+	<option value="1"> 1 </option>
+	<option value="2"> 2 </option>
+	<option value="3"> 3 </option>
+	<option value="4"> 4 </option>
+	<option value="5"> 5 </option>
+</select>
+</body> 
+</html>
