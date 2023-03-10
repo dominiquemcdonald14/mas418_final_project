@@ -1,15 +1,16 @@
 library(tidyverse)
 
-setwd("/Users/tixradmin/Documents/GitHub/mas418_final_project/Glassdoor")
-job_data <- read.csv("jobs_glassdoor_dataset.csv")
+setwd("/Users/tixradmin/Documents/GitHub/mas418_final_project/Glassdoor/output")
+job_data <- read.csv("output_.csv")
 
 setwd("/Users/tixradmin/Documents/GitHub/mas418_final_project/Glassdoor/Clean_R_Danny")
 
 ### Need to clean salary
+job_data <- job_data %>%
+  select(-requested_url)
+
 salary_data <- job_data %>%
   filter(!is.na(company_salary))
-
-str_extract_all("Employer est.:$78K - $162K ", "[0-9]+")
 
 for (i in 1:nrow(salary_data)) {
   temp <- str_extract_all(salary_data$company_salary[i], "[0-9]+")[[1]]
@@ -31,11 +32,17 @@ write.csv(salary_data, "salary.csv")
 role <- c("Data Scientist", "Data Analytics", "Applied Scientist",
           "Data Engineer", "Software Engineer", "Data Integration",
           "Machine Learning", "Systems Engineer", "Business Analytics",
-          "Statistician", "Data Science", "Data Analyst")
+          "Statistician", "Data Science", "Data Analyst",
+          "System Technician", "Artificial Intelligence", "Decision Scientist",
+          "Natural Language Processing", "Data Architect", "Modeling",
+          "Data Review")
 role_change <- c("Data Scientist", "Data Analyst", "Machine Learning",
                  "Data Engineer", "Others", "Others",
                  "Machine Learning", "Others", "Data Analyst",
-                 "Data Scientist", "Data Scientist", "Data Analyst")
+                 "Data Scientist", "Data Scientist", "Data Analyst",
+                 "Others", "Machine Learning", "Data Scientist",
+                 "Machine Learning", "Data Engineer", "Data Scientist",
+                 "Data Analyst")
 
 for (i in 1:nrow(salary_data)) {
   temp <- salary_data$company_offeredRole[i]
@@ -45,7 +52,30 @@ for (i in 1:nrow(salary_data)) {
 }
 
 table(salary_data$role)
+
+### Next location
+for (i in 1:nrow(salary_data)) {
+  temp <- salary_data$company_roleLocation[i]
+  num <- nchar(temp)
+  
+  if (temp == "Remote") {
+    salary_data$location[i] <- "Remote"
+  } else {
+    salary_data$location[i] <- substr(temp, num-1, num)
+  }
+}
+
+table(salary_data$location)
+
+### Also Skills
+salary_data <- salary_data %>%
+  mutate(R = ifelse(str_detect(listing_jobDesc, "R"), 1, 0),
+         Python = ifelse(str_detect(listing_jobDesc, "Python"), 1, 0),
+         SQL = ifelse(str_detect(listing_jobDesc, "SQL"), 1, 0))
+
+sum(salary_data$R)/nrow(salary_data)
+sum(salary_data$Python)/nrow(salary_data)
+sum(salary_data$SQL)/nrow(salary_data)
+
 write.csv(salary_data, "salary.csv")
 
-check <- salary_data %>%
-  filter(role %in% c("Machine Learning", "Applied Scientist"))
