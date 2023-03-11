@@ -14,6 +14,10 @@ def rec_page():
 	return render_template('recommender.html')
 
 
+@app.route('/recommender/result')
+def rec_result_page():
+	return render_template('recommender_result.html')
+
 @app.route('/summary')	
 def summ_page():
 		return render_template('summary.html')
