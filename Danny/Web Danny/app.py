@@ -44,13 +44,56 @@ def hello3(name="World"):
 
 ###################
 # Now build an API that display image
-@app.route("/image")
-def show_image():
-    full_filename1 = os.path.join(app.config['UPLOAD_FOLDER'], 'density.png')
-    full_filename2 = os.path.join(app.config['UPLOAD_FOLDER'], 'image2.png')
-    full_filename3 = os.path.join(app.config['UPLOAD_FOLDER'], 'image3.png')
-    return render_template("index.html", user_image = full_filename1, user_image2 = full_filename2, user_image3 = full_filename3)
+@app.route("/summary")
+def summary():
+    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'density.png')
+    return render_template("index.html", user_image = full_filename)
 
+@app.route("/role")
+def role():
+    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'image2.png')
+    return render_template("index.html", user_image = full_filename)
+
+@app.route("/role/table")
+def role_table():
+    table_data = [
+        {'name': 'Data Analyst', 'salary': '81.5'},
+        {'name': 'Data Engineer', 'salary': '118'},
+        {'name': 'Data Scientist', 'salary': '108'},
+        {'name': 'Machine Learning', 'salary': '83'},
+        {'name': 'Others', 'salary': '20'},
+    ]
+    
+    return render_template('index_table.html', table_data=table_data)
+
+@app.route("/location")
+def location():
+    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'image3.png')
+    return render_template("index.html", user_image = full_filename)
+
+
+@app.route("/location/table")
+def location_table():
+    table_data = [
+        {'name': 'NY', 'salary': '375'},
+        {'name': 'CO', 'salary': '149.5'},
+        {'name': 'MO', 'salary': '137.75'},
+        {'name': 'CT', 'salary': '136'},
+        {'name': 'FL', 'salary': '130'},
+    ]
+    
+    return render_template('index_table.html', table_data=table_data)
+
+@app.route("/skill")
+def skill_table():
+    table_data = [
+        {'Python': '0', 'SQL': '0', 'salary': '95.61'},
+        {'Python': '0', 'SQL': '1', 'salary': '118.25'},
+        {'Python': '1', 'SQL': '0', 'salary': '148.58'},
+        {'Python': '1', 'SQL': '1', 'salary': '106.42'},
+    ]
+    
+    return render_template('index_table_2.html', table_data=table_data)
 
 
 ##################
