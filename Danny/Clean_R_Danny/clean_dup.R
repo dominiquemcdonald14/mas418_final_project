@@ -22,5 +22,5 @@ for (i in 1:nrow(job_data)) {
 }
 
 ### Output file
-setwd("/Users/tixradmin/Documents/GitHub/mas418_final_project/Glassdoor/Clean_R_Danny")
-write.csv(job_no_dup, "salary_no_dup.csv")
+setwd("/Users/tixradmin/Documents/GitHub/mas418_final_project/Glassdoor/output")
+write.csv(job_no_dup, "output_.csv")

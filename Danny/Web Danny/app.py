@@ -49,10 +49,12 @@ def summary():
     full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'density.png')
     return render_template("index.html", user_image = full_filename)
 
+
 @app.route("/role")
 def role():
     full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'image2.png')
     return render_template("index.html", user_image = full_filename)
+
 
 @app.route("/role/table")
 def role_table():
