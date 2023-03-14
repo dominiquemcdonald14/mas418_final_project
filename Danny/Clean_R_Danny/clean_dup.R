@@ -4,9 +4,9 @@ library(tidyverse)
 setwd("/Users/tixradmin/Documents/GitHub/mas418_final_project/Glassdoor/output")
 job_data <- read.csv("output_.csv")
 job_data2 <- read.csv("output_03-03-2023.csv")
-job_data3 <- read.csv("output_17-02-2023.csv")
+job_data3 <- read.csv("output_03_13_23.csv")
 
-job_data <- rbind(job_data, job_data2)
+job_data <- rbind(job_data, job_data2, job_data3)
 
 ### Cleaning
 job_no_dup <- data.frame()

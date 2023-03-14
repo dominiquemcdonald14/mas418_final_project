@@ -6,11 +6,15 @@
 <body>
     <h1>Summarizer</h1>
         <img src="{{ user_image }}" alt="User Image">
+    <p>The median salary for a <b>Data Scientist</b> is about 
+<b>$108k</b>.
     <p>Please Choose a Graph:</p>
 <form action ="/role">
     <input type = "submit" value = "Salary by Role Graph">
     <input type = "submit" value = "Salary by Location Graph" 
 formaction="/location">
+    <input type = "submit" value = "Salary by Education Graph" formaction 
+= "/education">
     <input type = "submit" value = "Salary Density Graph" 
 formaction="/summary">
 </form>
@@ -19,6 +23,8 @@ formaction="/summary">
     <input type = "submit" value = "Role Data Table">
     <input type = "submit" value = "Location Data Table" 
 formaction="/location/table">
+    <input type = "submit" value = "Education Data Table" 
+formaction="/education/table">
     <input type = "submit" value = "Skill Data Table" formaction="/skill">
 </form>
     <p>Thanks for using the <b>Summarizer</b>! </p>

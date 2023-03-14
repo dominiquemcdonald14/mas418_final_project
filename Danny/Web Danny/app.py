@@ -97,6 +97,16 @@ def skill_table():
     
     return render_template('index_table_2.html', table_data=table_data)
 
+@app.route('/form', methods =["GET", "POST"])
+def gfg():
+    if request.method == "POST":
+       # getting input with name = fname in HTML form
+       first_name = request.form.get("fname")
+       # getting input with name = lname in HTML form
+       last_name = request.form.get("lname")
+       return "Your name is "+first_name + last_name
+    return render_template("form.html")
+
 
 ##################
 # Main method to launch Flask server

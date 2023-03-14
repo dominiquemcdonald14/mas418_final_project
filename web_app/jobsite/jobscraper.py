@@ -40,9 +40,9 @@ def role():
 @app.route("/role/table")
 def role_table():
     table_data = [
-        {'name': 'Data Analyst', 'salary': '74.5'},
+        {'name': 'Data Analyst', 'salary': '76'},
         {'name': 'Data Engineer', 'salary': '119.5'},
-        {'name': 'Data Scientist', 'salary': '115'},
+        {'name': 'Data Scientist', 'salary': '106'},
         {'name': 'Machine Learning', 'salary': '130'},
         {'name': 'Others', 'salary': '125'},
     ]
@@ -61,19 +61,38 @@ def location_table():
         {'name': 'CT', 'salary': '149.75'},
         {'name': 'CO', 'salary': '149.5'},
         {'name': 'UT', 'salary': '140.25'},
-        {'name': 'MI', 'salary': '133.75'},
         {'name': 'MO', 'salary': '132'},
+        {'name': 'DC', 'salary': '130.25'},
     ]
     
     return render_template('index_table.html', table_data=table_data)
 
+@app.route("/education")
+def education():
+    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'image4.png')
+    return render_template("index.html", user_image = full_filename)
+
+
+@app.route("/education/table")
+def education_table():
+    table_data = [
+        {'PhD': '0', 'Master': '0', 'Bachelor': '1', 'salary': '111.06'},
+        {'PhD': '0', 'Master': '1', 'Bachelor': '1', 'salary': '94.95'},
+        {'PhD': '0', 'Master': '1', 'Bachelor': '0', 'salary': '91.71'},
+        {'PhD': '1', 'Master': '1', 'Bachelor': '1', 'salary': '114.0'},
+        {'PhD': '1', 'Master': '1', 'Bachelor': '0', 'salary': '128.55'},
+        {'PhD': '1', 'Master': '0', 'Bachelor': '0', 'salary': '145.75'},
+    ]
+    
+    return render_template('index_table_3.html', table_data=table_data)
+
 @app.route("/skill")
 def skill_table():
     table_data = [
-        {'Python': '0', 'SQL': '0', 'salary': '111.52'},
-        {'Python': '0', 'SQL': '1', 'salary': '145.31'},
-        {'Python': '1', 'SQL': '0', 'salary': '101.78'},
-        {'Python': '1', 'SQL': '1', 'salary': '117.54'},
+        {'Python': '0', 'SQL': '0', 'salary': '107.8'},
+        {'Python': '0', 'SQL': '1', 'salary': '126.3'},
+        {'Python': '1', 'SQL': '0', 'salary': '101.95'},
+        {'Python': '1', 'SQL': '1', 'salary': '111.38'},
     ]
     
     return render_template('index_table_2.html', table_data=table_data)
