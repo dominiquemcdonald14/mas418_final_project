@@ -1,7 +1,7 @@
 library(tidyverse)
 
 setwd("/Users/tixradmin/Documents/GitHub/mas418_final_project/Glassdoor/output")
-job_data <- read.csv("output_.csv")
+job_data <- read.csv("output_no_dup.csv")
 
 setwd("/Users/tixradmin/Documents/GitHub/mas418_final_project/Danny/Clean_R_Danny")
 job_data <- read.csv("salary_no_dup.csv")
@@ -9,14 +9,22 @@ job_data <- read.csv("salary_no_dup.csv")
 ### Cleaning up, first salary
 salary_data <- job_data %>%
   filter(!is.na(company_salary))
+salary_data <- salary_data[-52,]
 
 for (i in 1:nrow(salary_data)) {
-  temp <- str_extract_all(salary_data$company_salary[i], "[0-9]+")[[1]]
   
-  if (length(temp) == 2) {
-    salary_temp <- mean(as.numeric(temp))
+  if (str_detect(salary_data$company_salary[i],"Hour")) {
+    
+    salary_temp <- 0
+    
   } else {
-    salary_temp <- as.numeric(temp)
+    temp <- str_extract_all(salary_data$company_salary[i], "[0-9]+")[[1]]
+    
+    if (length(temp) == 2) {
+      salary_temp <- mean(as.numeric(temp))
+    } else {
+      salary_temp <- as.numeric(temp)
+    } 
   }
   
   salary_data$salary[i] <- salary_temp
@@ -31,14 +39,18 @@ role <- c("Data Scientist", "Data Analytics", "Applied Scientist",
           "Statistician", "Data Science", "Data Analyst",
           "System Technician", "Artificial Intelligence", "Decision Scientist",
           "Natural Language Processing", "Data Architect", "Modeling",
-          "Data Review", "Reporting Analyst")
+          "Data Review", "Reporting Analyst", "AI Architect",
+          "Statistical Program", "AI", "Mathematician",
+          "Data Quality Engineer", "Predictive Analytics Modeler")
 role_change <- c("Data Scientist", "Data Analyst", "Machine Learning",
                  "Data Engineer", "Others", "Others",
                  "Machine Learning", "Others", "Data Analyst",
                  "Data Scientist", "Data Scientist", "Data Analyst",
                  "Others", "Machine Learning", "Data Scientist",
                  "Machine Learning", "Data Engineer", "Data Scientist",
-                 "Data Analyst", "Data Analyst")
+                 "Data Analyst", "Data Analyst", "Machine Learning",
+                 "Data Scientist", "Machine Learning", "Others",
+                 "Data Engineer", "Data Scientist")
 
 for (i in 1:nrow(salary_data)) {
   temp <- salary_data$company_offeredRole[i]
@@ -73,5 +85,13 @@ salary_data <- salary_data %>%
 sum(salary_data$Python)/nrow(salary_data)
 sum(salary_data$SQL)/nrow(salary_data)
 
-write.csv(salary_data, "salary.csv")
+### Let's add education
+salary_data <- salary_data %>%
+  mutate(Education = ifelse(str_detect(listing_jobDesc, "Ph\\.D"), "Ph.D",
+                            ifelse(str_detect(listing_jobDesc, "Master"), "Master",
+                                              ifelse(str_detect(listing_jobDesc, "Bachelor"),"Bachelor","None"))))
 
+sum(salary_data$Education == "Master")
+sum(salary_data$Education == "Bachelor")
+
+write.csv(salary_data, "salary.csv")

@@ -59,11 +59,11 @@ def role():
 @app.route("/role/table")
 def role_table():
     table_data = [
-        {'name': 'Data Analyst', 'salary': '81.5'},
-        {'name': 'Data Engineer', 'salary': '118'},
-        {'name': 'Data Scientist', 'salary': '108'},
-        {'name': 'Machine Learning', 'salary': '83'},
-        {'name': 'Others', 'salary': '20'},
+        {'name': 'Data Analyst', 'salary': '74.5'},
+        {'name': 'Data Engineer', 'salary': '119.5'},
+        {'name': 'Data Scientist', 'salary': '115'},
+        {'name': 'Machine Learning', 'salary': '130'},
+        {'name': 'Others', 'salary': '125'},
     ]
     
     return render_template('index_table.html', table_data=table_data)
@@ -77,11 +77,11 @@ def location():
 @app.route("/location/table")
 def location_table():
     table_data = [
-        {'name': 'NY', 'salary': '375'},
+        {'name': 'CT', 'salary': '149.75'},
         {'name': 'CO', 'salary': '149.5'},
-        {'name': 'MO', 'salary': '137.75'},
-        {'name': 'CT', 'salary': '136'},
-        {'name': 'FL', 'salary': '130'},
+        {'name': 'UT', 'salary': '140.25'},
+        {'name': 'MI', 'salary': '133.75'},
+        {'name': 'MO', 'salary': '132'},
     ]
     
     return render_template('index_table.html', table_data=table_data)
@@ -89,10 +89,10 @@ def location_table():
 @app.route("/skill")
 def skill_table():
     table_data = [
-        {'Python': '0', 'SQL': '0', 'salary': '95.61'},
-        {'Python': '0', 'SQL': '1', 'salary': '118.25'},
-        {'Python': '1', 'SQL': '0', 'salary': '148.58'},
-        {'Python': '1', 'SQL': '1', 'salary': '106.42'},
+        {'Python': '0', 'SQL': '0', 'salary': '111.52'},
+        {'Python': '0', 'SQL': '1', 'salary': '145.31'},
+        {'Python': '1', 'SQL': '0', 'salary': '101.78'},
+        {'Python': '1', 'SQL': '1', 'salary': '117.54'},
     ]
     
     return render_template('index_table_2.html', table_data=table_data)
