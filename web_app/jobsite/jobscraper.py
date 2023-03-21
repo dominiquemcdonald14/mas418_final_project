@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import os
 from datetime import datetime
+import string
+import csv
 
 IMAGE = os.path.join('static','image')
 
@@ -14,14 +16,35 @@ def home_page():
 	return render_template('home.html')
 
 
-@app.route('/recommender')
-def rec_page():
-	return render_template('recommender.html')
+#@app.route('/recommender')
+#def rec_page():
+	#return render_template('recommender.html')
 
 
 @app.route('/recommender/result')
 def rec_result_page():
 	return render_template('recommender_result.html')
+
+@app.route('/recommender', methods =["GET", "POST"])
+def gfg():
+    if request.method == "POST":
+       # getting input with name = fname in HTML form
+       location = request.form.get("loc")
+       # getting input with name = lname in HTML form
+       skills = request.form.get("sk")
+       # getting input with name = lname in HTML form
+       education = request.form.get("ed")
+       
+       df = pd.read_csv('salary.csv', encoding= 'unicode_escape')
+
+       loc_recommend_df = df[(df['location'] == location) | (df['High_Ed'] == education) | (df['Python'] == skills)]
+    
+       # sort DataFrame by salary in descending order and return top 5 observations
+       top_salaries = loc_recommend_df.sort_values(by='salary', ascending=False).head(5)
+       
+       return top_salaries[['companyName', 'company_starRating', 'company_offeredRole' , 'salary', 'requested_url']].to_dict()
+       #return render_template('index_table_4.html', table_data=table_data)
+    return render_template("form.html")
 
 ###################
 # Now build an API that display image
