@@ -37,13 +37,14 @@ def gfg():
        
        df = pd.read_csv('salary.csv', encoding= 'unicode_escape')
 
-       loc_recommend_df = df[(df['location'] == location) | (df['High_Ed'] == education) | (df['Python'] == skills)]
+       loc_recommend_df = df[(df['High_Ed'] == education)]
     
        # sort DataFrame by salary in descending order and return top 5 observations
        top_salaries = loc_recommend_df.sort_values(by='salary', ascending=False).head(5)
-       
-       return top_salaries[['companyName', 'company_starRating', 'company_offeredRole' , 'salary', 'requested_url']].to_dict()
-       #return render_template('index_table_4.html', table_data=table_data)
+       table_data = top_salaries[['companyName', 'company_starRating', 'company_offeredRole' , 'salary', 'requested_url']]
+
+       #return table_data
+       return render_template('index_table_5.html', tables=[table_data.to_html(classes='data')], titles = table_data.columns.values)
     return render_template("form.html")
 
 ###################
